@@ -1,0 +1,32 @@
+{
+  "name": "xcrypt-local",
+  "version": "1.2.0",
+  "description": "Local-first text and file encryption dashboard using authenticated AES-256-GCM.",
+  "private": false,
+  "license": "MIT",
+  "author": "MEET ZALA (XMEET)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check public/app.js && node --test"
+  },
+  "keywords": [
+    "encryption",
+    "aes-256-gcm",
+    "privacy",
+    "localhost",
+    "cryptography",
+    "xmeet"
+  ],
+  "files": [
+    "server.js",
+    "public/",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md",
+    "CHANGELOG.md"
+  ]
+}
