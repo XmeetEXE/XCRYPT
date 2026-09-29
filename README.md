@@ -38,21 +38,30 @@ Start it on your computer, open the local dashboard, encrypt your content, and s
 
 ## How it works
 
-~~~text
-Your text or file
-       |
-       v
-XCRYPT dashboard (browser)
-       |
-       v
-Local Node.js server (127.0.0.1)
-       |
-       v
-AES-256-GCM encryption
-       |
-       +------> Encrypted package
-       |
-       +------> Secret key (save separately)
+~~~mermaid
+flowchart TD
+    A["Your text or file"] --> B["XCRYPT browser dashboard"]
+    B --> C["Local Node.js server<br/>127.0.0.1"]
+    C --> D["Generate fresh 256-bit key<br/>and 96-bit nonce"]
+    D --> E["AES-256-GCM encryption"]
+    E --> F["Opaque encrypted package<br/>.xcrypt for files"]
+    D --> G["Secret key"]
+    F --> H["Save or share package"]
+    G --> I["Store key separately"]
+
+    J["Encrypted package"] --> K["Load package + matching key"]
+    L["Matching secret key"] --> K
+    K --> M["AES-GCM authentication check"]
+    M --> N["Decrypt"]
+    N --> O["Recovered text or file"]
+
+    style B fill:#172554,stroke:#60a5fa,color:#fff
+    style C fill:#172554,stroke:#60a5fa,color:#fff
+    style E fill:#064e3b,stroke:#34d399,color:#fff
+    style F fill:#312e81,stroke:#a5b4fc,color:#fff
+    style G fill:#78350f,stroke:#fbbf24,color:#fff
+    style M fill:#064e3b,stroke:#34d399,color:#fff
+    style O fill:#064e3b,stroke:#34d399,color:#fff
 ~~~
 
 For text, the encrypted output is an opaque Base64url string. The package contains the nonce, authentication tag, and ciphertext in a compact format; it does not expose plaintext metadata as JSON.
